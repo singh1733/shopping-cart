@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Cart from "../shopping-cart/Cart";
-import styles from './resetAndOutlet.module.css';
+import styles from "./resetAndOutlet.module.css";
 
 const Nav = () => {
   const [inCart, setInCart] = useState([
@@ -19,15 +19,17 @@ const Nav = () => {
   ]);
 
   function inCartSetter(index) {
-    const temp = [...inCart];
-    temp[index] = !temp[index];
-    if (inCart[index]) {
-      const temp = [...itemsCount];
-      temp[index] = 0;
-      setItemsCount(temp);
-    }
+    if (itemsCount[index] != 0) {
+      const temp = [...inCart];
+      temp[index] = !temp[index];
+      if (inCart[index]) {
+        const temp = [...itemsCount];
+        temp[index] = 0;
+        setItemsCount(temp);
+      }
 
-    setInCart(temp);
+      setInCart(temp);
+    }
   }
 
   const [items, setItems] = useState([]);

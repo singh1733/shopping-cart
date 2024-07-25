@@ -25,7 +25,9 @@ function Shop() {
           <button onClick={() => decrementItem(item.id - 1)}>-</button>
           <p>{itemsCount[item.id - 1]}</p>
           <button onClick={() => incrementItem(item.id - 1)}>+</button>
-          <button onClick={() => inCartSetter(item.id - 1)}>Add to cart</button>
+          <button onClick={() => inCartSetter(item.id - 1)}>
+            {inCart[item.id-1] === false ? "Add to cart" : "Remove from cart"}
+          </button>
         </div>
       ))}
     </div>
