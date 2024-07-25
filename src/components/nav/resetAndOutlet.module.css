@@ -71,22 +71,32 @@ button {
 }
 
 .resetAndOutlet {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 90vh;
   align-items: center;
 }
 
 body{
-  padding: 20px;
+  background-color: #F8FCDA;
 }
 
 .nav{
   display: grid;
   grid-template-columns: auto auto 1fr;
-  width: 90vw;
   gap: 50px;
   justify-items: start; 
   font-size: 30px;
+  background-color: #E3E9C2;
+  width: 100%;
+  padding: 20px;
+  color: #5f4c40;
+  font-weight: bold;
+}
+
+.nav a{
+  color: #5f4c40;
+  text-decoration: none;
 }
 
 .nav div{

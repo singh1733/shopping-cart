@@ -86,7 +86,7 @@ const Nav = () => {
           CART
         </div>
       </div>
-      <div className="display">
+      <div >
         <Outlet
           context={[
             inCart,
