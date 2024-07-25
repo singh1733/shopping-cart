@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Cart from "../shopping-cart/Cart";
+import styles from './resetAndOutlet.module.css';
 
 const Nav = () => {
   const [inCart, setInCart] = useState([
@@ -77,8 +78,8 @@ const Nav = () => {
   }
 
   return (
-    <>
-      <div className="nav">
+    <div className={styles.resetAndOutlet}>
+      <div className={styles.nav}>
         <Link to="home">HOME</Link>
         <Link to="/shop">SHOP</Link>
         <div className="cart" onClick={toggleCart}>
@@ -108,7 +109,7 @@ const Nav = () => {
           incrementItem={incrementItem}
         />
       )}
-    </>
+    </div>
   );
 };
 

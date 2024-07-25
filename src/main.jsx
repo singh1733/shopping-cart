@@ -5,7 +5,6 @@ import Nav from "./components/nav/Nav";
 import Shop from "./components/shop/Shop";
 import Cart from "./components/shopping-cart/Cart";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./index.css";
 
 const router = createBrowserRouter([
   {
