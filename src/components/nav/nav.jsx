@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Nav = () => {
-
   const [inCart, setInCart] = useState([
     false,
     false,
@@ -20,18 +19,29 @@ const Nav = () => {
   function inCartSetter(index) {
     const temp = [...inCart];
     temp[index] = !temp[index];
-    if (temp) setInCart(temp);
-  }
+    if(inCart[index]){
+      const temp = [...itemsCount];
+      temp[index]=0;
+      setItemsCount(temp);
+    }
 
+    setInCart(temp);
+  }
 
   const [items, setItems] = useState([]);
   const [itemsCount, setItemsCount] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 
   function decrementItem(index) {
+    const temp = [...itemsCount];
+
     if (itemsCount[index] != 0) {
-      const temp = [...itemsCount];
       temp[index]--;
       setItemsCount(temp);
+    }
+    if (temp[index] === 0) {
+      const temp2 = [...inCart];
+      temp2[index] = false;
+      setInCart(temp2);
     }
   }
 
@@ -40,8 +50,6 @@ const Nav = () => {
     temp[index]++;
     setItemsCount(temp);
   }
-
-    
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -61,19 +69,24 @@ const Nav = () => {
     fetchItems();
   }, []);
 
-
-
   return (
     <>
       <div className="nav">
         <Link to="home">HOME</Link>
-        <Link to="/shop">
-          SHOP
-        </Link>
+        <Link to="/shop">SHOP</Link>
         <Link to="cart">CART</Link>
       </div>
       <div className="display">
-        <Outlet context={[inCartSetter, items,itemsCount, decrementItem, incrementItem]}/>
+        <Outlet
+          context={[
+            inCart,
+            inCartSetter,
+            items,
+            itemsCount,
+            decrementItem,
+            incrementItem,
+          ]}
+        />
       </div>
     </>
   );

@@ -1,13 +1,8 @@
-import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 
-
-function Shop(){
-  
-  const [inCartSetter, items,itemsCount, decrementItem, incrementItem]=useOutletContext();
-
-  
-  
+function Shop() {
+  const [inCart, inCartSetter, items, itemsCount, decrementItem, incrementItem] =
+    useOutletContext();
 
   return (
     <>
