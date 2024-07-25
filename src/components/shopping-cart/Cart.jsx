@@ -1,14 +1,11 @@
-import { useOutletContext } from "react-router-dom";
-
-const Cart = () => {
-  const [
-    inCart,
-    inCartSetter,
-    items,
-    itemsCount,
-    decrementItem,
-    incrementItem,
-  ] = useOutletContext();
+function Cart({
+  inCart,
+  inCartSetter,
+  items,
+  itemsCount,
+  decrementItem,
+  incrementItem,
+}) {
   return (
     <div className="cart">
       {items.map((item) =>
@@ -17,6 +14,7 @@ const Cart = () => {
             <img src={item.image} alt={item.title} />
             <p>x {itemsCount[item.id]}</p>
             <p>{item.title}</p>
+            <p>${parseInt(item.price) * itemsCount[item.id]}</p>
             <button onClick={() => decrementItem(item.id)}>-</button>
             <p>{itemsCount[item.id]}</p>
             <button onClick={() => incrementItem(item.id)}>+</button>
@@ -28,6 +26,6 @@ const Cart = () => {
       )}
     </div>
   );
-};
+}
 
 export default Cart;

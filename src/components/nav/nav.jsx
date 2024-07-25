@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Cart from "../shopping-cart/Cart";
 
 const Nav = () => {
   const [inCart, setInCart] = useState([
@@ -19,9 +20,9 @@ const Nav = () => {
   function inCartSetter(index) {
     const temp = [...inCart];
     temp[index] = !temp[index];
-    if(inCart[index]){
+    if (inCart[index]) {
       const temp = [...itemsCount];
-      temp[index]=0;
+      temp[index] = 0;
       setItemsCount(temp);
     }
 
@@ -69,12 +70,20 @@ const Nav = () => {
     fetchItems();
   }, []);
 
+  const [displayCart, setDisplayCart] = useState(false);
+
+  function toggleCart() {
+    setDisplayCart(!displayCart);
+  }
+
   return (
     <>
       <div className="nav">
         <Link to="home">HOME</Link>
         <Link to="/shop">SHOP</Link>
-        <Link to="cart">CART</Link>
+        <div className="cart" onClick={toggleCart}>
+          CART
+        </div>
       </div>
       <div className="display">
         <Outlet
@@ -88,6 +97,17 @@ const Nav = () => {
           ]}
         />
       </div>
+      {displayCart && (
+        <Cart
+          onClick={toggleCart}
+          inCart={inCart}
+          inCartSetter={setInCart}
+          items={items}
+          itemsCount={itemsCount}
+          decrementItem={decrementItem}
+          incrementItem={incrementItem}
+        />
+      )}
     </>
   );
 };

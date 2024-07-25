@@ -1,8 +1,14 @@
 import { useOutletContext } from "react-router-dom";
 
 function Shop() {
-  const [inCart, inCartSetter, items, itemsCount, decrementItem, incrementItem] =
-    useOutletContext();
+  const [
+    inCart,
+    inCartSetter,
+    items,
+    itemsCount,
+    decrementItem,
+    incrementItem,
+  ] = useOutletContext();
 
   return (
     <>
@@ -10,6 +16,7 @@ function Shop() {
         <div className="item" key={item.id}>
           <img src={item.image} alt={item.title} />
           <p>{item.title}</p>
+          <p>${parseInt(item.price)}</p>
           <button onClick={() => decrementItem(item.id)}>-</button>
           <p>{itemsCount[item.id]}</p>
           <button onClick={() => incrementItem(item.id)}>+</button>
