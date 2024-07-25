@@ -100,7 +100,7 @@ const Nav = () => {
           ]}
         />
       </div>
-      {displayCart && (
+      {(
         <Cart
           onClick={toggleCart}
           inCart={inCart}
@@ -109,6 +109,8 @@ const Nav = () => {
           itemsCount={itemsCount}
           decrementItem={decrementItem}
           incrementItem={incrementItem}
+          toggleCart={toggleCart}
+          displayCart={displayCart}
         />
       )}
     </div>
