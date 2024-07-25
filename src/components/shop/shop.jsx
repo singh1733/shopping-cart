@@ -1,29 +1,13 @@
 import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
-const Shop = () => {
-  const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      const promises = [];
+function Shop(){
+  
+  const [inCartSetter, items,itemsCount, decrementItem, incrementItem]=useOutletContext();
 
-      for (let i = 1; i <= 10; i++) {
-        promises.push(
-          fetch("https://fakestoreapi.com/products/" + i, {
-            mode: "cors",
-          }).then((res) => res.json())
-        );
-      }
-      const results = await Promise.all(promises);
-      setItems(results);
-    };
-
-    fetchItems();
-  }, []);
-
-  const valueIntiliaizer=()=>{
-
-  }
+  
+  
 
   return (
     <>
@@ -31,14 +15,14 @@ const Shop = () => {
         <div className="item" key={item.id}>
           <img src={item.image} alt={item.title} />
           <p>{item.title}</p>
-          <button>-</button>
-          <p></p>
-          <button>+</button>
-          <button>Add to cart</button>
+          <button onClick={() => decrementItem(item.id)}>-</button>
+          <p>{itemsCount[item.id]}</p>
+          <button onClick={() => incrementItem(item.id)}>+</button>
+          <button onClick={() => inCartSetter(item.id)}>Add to cart</button>
         </div>
       ))}
     </>
   );
-};
+}
 
 export default Shop;
