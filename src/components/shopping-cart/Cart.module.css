@@ -23,11 +23,7 @@
   right: 0; /* Final position */
 }
 
-.Cart.noShow {
-  right: -100%; /* Final position */
-}
-
-.Cart .Title{
+.Cart .Title {
   font-size: 50px;
 }
 

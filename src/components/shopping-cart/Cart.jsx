@@ -12,9 +12,7 @@ function Cart({
   displayCart,
 }) {
   return (
-    <div
-      className={`${styles.Cart} ${displayCart ? styles.show : styles.noShow}`}
-    >
+    <div className={`${styles.Cart} ${displayCart ? styles.show : ""}`}>
       <p className={styles.Title}>Cart</p>
       <button onClick={toggleCart} className={styles.Title}>
         X
