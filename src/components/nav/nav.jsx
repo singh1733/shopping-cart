@@ -82,11 +82,11 @@ const Nav = () => {
       <div className={styles.nav}>
         <Link to="home">HOME</Link>
         <Link to="/shop">SHOP</Link>
-        <div className="cart" onClick={toggleCart}>
+        <button className="cart" onClick={toggleCart}>
           CART
-        </div>
+        </button>
       </div>
-      <div >
+      <div className={styles.Outlet}>
         <Outlet
           context={[
             inCart,
