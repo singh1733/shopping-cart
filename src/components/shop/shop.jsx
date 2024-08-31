@@ -3,8 +3,9 @@ import styles from "./Shop.module.css";
 
 function Shop() {
   const [
-    inCart,
-    inCartSetter,
+    cart,
+    cartRemover,
+    cartAdder,
     items,
     itemsCount,
     decrementItem,
@@ -22,11 +23,15 @@ function Shop() {
           </p>
           <img src={item.image} alt={item.title} />
           <p>${parseFloat(item.price).toFixed(2)}</p>
-          <button onClick={() => decrementItem(item.id - 1)}>-</button>
+          <button onClick={() => decrementItem(item.id - 1, item)}>-</button>
           <p>{itemsCount[item.id - 1]}</p>
           <button onClick={() => incrementItem(item.id - 1)}>+</button>
-          <button onClick={() => inCartSetter(item.id - 1)}>
-            {inCart[item.id-1] === false ? "Add to cart" : "Remove from cart"}
+          <button
+            onClick={() => {
+              cart.includes(item) ? cartRemover(item) : cartAdder(item);
+            }}
+          >
+            {cart.includes(item) ? "Remove from cart" : "Add to cart"}
           </button>
         </div>
       ))}

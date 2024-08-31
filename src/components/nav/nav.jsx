@@ -5,37 +5,31 @@ import Cart from "../shopping-cart/Cart";
 import styles from "./resetAndOutlet.module.css";
 
 const Nav = () => {
-  const [inCart, setInCart] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [cart, setCart] = useState([]);
+  const [items, setItems] = useState([]);
+  const [itemsCount, setItemsCount] = useState([0]);
 
-  function inCartSetter(index) {
-    if (itemsCount[index] != 0) {
-      const temp = [...inCart];
-      temp[index] = !temp[index];
-      if (inCart[index]) {
-        const temp = [...itemsCount];
-        temp[index] = 0;
-        setItemsCount(temp);
-      }
-
-      setInCart(temp);
+  function cartAdder(item) {
+    const temp = [...cart];
+    temp.splice(item.id - 1, 1, item);
+    if (itemsCount[item.id - 1] == 0) {
+      const temp2 = [...itemsCount];
+      temp2.splice(item.id - 1, 1, 1);
+      setItemsCount(temp2);
     }
+    setCart(temp);
   }
 
-  const [items, setItems] = useState([]);
-  const [itemsCount, setItemsCount] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  function cartRemover(item) {
+    const temp = [...cart];
+    temp.splice(item.id - 1, 1, 0);
+    const temp2 = [...itemsCount];
+    temp2.splice(item.id - 1, 1, 0);
+    setCart(temp);
+    setItemsCount(temp2);
+  }
 
-  function decrementItem(index) {
+  function decrementItem(index, item) {
     const temp = [...itemsCount];
 
     if (itemsCount[index] != 0) {
@@ -43,9 +37,7 @@ const Nav = () => {
       setItemsCount(temp);
     }
     if (temp[index] === 0) {
-      const temp2 = [...inCart];
-      temp2[index] = false;
-      setInCart(temp2);
+      cartRemover(item);
     }
   }
 
@@ -68,6 +60,12 @@ const Nav = () => {
       }
       const results = await Promise.all(promises);
       setItems(results);
+      const temp = [];
+      for (let i = 0; i < items.length; i++) {
+        temp.push(0);
+        cart.push(0);
+      }
+      setItemsCount(temp);
     };
 
     fetchItems();
@@ -91,8 +89,9 @@ const Nav = () => {
       <div className={styles.Outlet}>
         <Outlet
           context={[
-            inCart,
-            inCartSetter,
+            cart,
+            cartRemover,
+            cartAdder,
             items,
             itemsCount,
             decrementItem,
@@ -100,11 +99,10 @@ const Nav = () => {
           ]}
         />
       </div>
-      {(
+      {
         <Cart
           onClick={toggleCart}
-          inCart={inCart}
-          inCartSetter={setInCart}
+          cart={cart}
           items={items}
           itemsCount={itemsCount}
           decrementItem={decrementItem}
@@ -112,7 +110,7 @@ const Nav = () => {
           toggleCart={toggleCart}
           displayCart={displayCart}
         />
-      )}
+      }
     </div>
   );
 };
