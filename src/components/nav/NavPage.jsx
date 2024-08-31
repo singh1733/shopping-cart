@@ -7,7 +7,27 @@ import styles from "./resetAndOutlet.module.css";
 const Nav = () => {
   const [cart, setCart] = useState([]);
   const [items, setItems] = useState([]);
-  const [itemsCount, setItemsCount] = useState([0]);
+  const [itemsCount, setItemsCount] = useState([]);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      const promises = [];
+
+      for (let i = 1; i <= 10; i++) {
+        promises.push(
+          fetch("https://fakestoreapi.com/products/" + i, {
+            mode: "cors",
+          }).then((res) => res.json())
+        );
+      }
+      const results = await Promise.all(promises);
+      setItems(results);
+      setItemsCount(new Array(results.length).fill(0));
+      setCart(new Array(results.length).fill(0));
+    };
+
+    fetchItems();
+  }, []);
 
   function cartAdder(item) {
     const temp = [...cart];
@@ -46,30 +66,6 @@ const Nav = () => {
     temp[index]++;
     setItemsCount(temp);
   }
-
-  useEffect(() => {
-    const fetchItems = async () => {
-      const promises = [];
-
-      for (let i = 1; i <= 10; i++) {
-        promises.push(
-          fetch("https://fakestoreapi.com/products/" + i, {
-            mode: "cors",
-          }).then((res) => res.json())
-        );
-      }
-      const results = await Promise.all(promises);
-      setItems(results);
-      const temp = [];
-      for (let i = 0; i < items.length; i++) {
-        temp.push(0);
-        cart.push(0);
-      }
-      setItemsCount(temp);
-    };
-
-    fetchItems();
-  }, []);
 
   const [displayCart, setDisplayCart] = useState(false);
 
