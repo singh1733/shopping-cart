@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import App from "./components/home-page/App";
 import Nav from "./components/nav/Nav";
 import Shop from "./components/shop/Shop";
-import Cart from "./components/shopping-cart/Cart";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
