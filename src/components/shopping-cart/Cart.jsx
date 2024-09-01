@@ -7,9 +7,16 @@ function Cart({
   incrementItem,
   toggleCart,
   displayCart,
+  hasInteracted
 }) {
+  
+
   return (
-    <div className={`${styles.Cart} ${displayCart ? styles.show : ""}`}>
+    <div
+      className={`${styles.Cart} ${displayCart ? styles.show : ""} ${
+        hasInteracted && !displayCart ? styles.hide : ""
+      }`}
+    >
       <p className={styles.Title}>Cart</p>
       <button onClick={toggleCart} className={styles.Title}>
         X

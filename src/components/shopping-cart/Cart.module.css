@@ -1,11 +1,11 @@
 .Cart {
-  position: absolute; /* Or fixed if needed */
+  position: absolute; 
   top: 0;
-  right: -100%;
+  visibility: hidden;
   min-width: 40%;
   max-width: 40%;
   height: 100%;
-  z-index: 9999; /* Higher value ensures it's on top */
+  z-index: 9999;
   background-color: #e3e9c2;
   width: auto;
   display: grid;
@@ -16,11 +16,41 @@
   padding: 20px;
   color: #5f4c40;
   border: 1px solid #5f4c40;
-  transition: right 0.5s ease; /* Add transition */
+  right: 0;
 }
 
 .Cart.show {
-  right: 0; /* Final position */
+  visibility: visible;
+  animation: slidein .5s ease;
+  position: absolute; 
+  right: 0;
+
+}
+
+.Cart.hide {
+  animation: slideout 1s ease;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(1000%);
+    visibility: hidden;
+  }
+  to {
+    transform: translateX(0%);
+    visibility: visible;
+  }
+}
+
+@keyframes slideout {
+  from {
+    transform: translateX(0%);
+    visibility: visible;
+  }
+  to {
+    transform: translateX(1000%);
+    visibility: hidden;
+  }
 }
 
 .Cart .Title {

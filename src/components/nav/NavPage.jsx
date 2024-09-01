@@ -68,6 +68,14 @@ const Nav = () => {
   }
 
   const [displayCart, setDisplayCart] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  
+  useEffect(() => {
+    if (displayCart) {
+      setHasInteracted(true);
+    }
+  }, [displayCart]);
 
   function toggleCart() {
     setDisplayCart(!displayCart);
@@ -105,6 +113,7 @@ const Nav = () => {
           incrementItem={incrementItem}
           toggleCart={toggleCart}
           displayCart={displayCart}
+          hasInteracted={hasInteracted}
         />
       }
     </div>
