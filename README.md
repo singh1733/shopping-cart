@@ -1,4 +1,4 @@
-# hopping Cart Project
+# Shopping Cart Project
 Description: This project demonstrates a mock shopping cart application built with React, using React concepts such as component structuring, state management, and routing with React Router. Users can navigate between a home page and a shop page, adjust item quantities, and dynamically manage their shopping cart.
 
 Features:
